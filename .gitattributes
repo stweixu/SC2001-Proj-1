@@ -1,0 +1,2 @@
+data10000000.txt filter=lfs diff=lfs merge=lfs -text
+datarange1000000.txt filter=lfs diff=lfs merge=lfs -text
