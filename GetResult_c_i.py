@@ -5,6 +5,7 @@ import pandas as pd
 
 
 def generateIndex():
+    # Generate list of index for file name [1000, 3000, 5000..., 10,000,000]
     array = []
     N = 1000
     for _ in range(4):

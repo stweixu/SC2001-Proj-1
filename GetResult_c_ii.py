@@ -5,6 +5,7 @@ import pandas as pd
 
 
 def runTest():
+    # Test with N = 100,000 as fixed size
     result = []
 
     with open('data100000.txt', 'r') as file:

@@ -5,7 +5,7 @@ from json import dump
 def generateRange(N, name):     # generate data
     data = []
     for i in range(1, 10, 2):
-        # if N is 1000, this will generate 5 arrays of 1000, 3000, 5000, 7000, 9000
+        # If N is 1000, this will generate 5 arrays of 1000, 3000, 5000, 7000, 9000
         maxNum = N * i * 10 - 1
 
         data.append(sample(range(1, maxNum), N * i))
