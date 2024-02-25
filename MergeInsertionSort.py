@@ -23,8 +23,8 @@ def merge(array, left, mid, right):
     k = left
     sizeL = mid - left + 1
     sizeR = right - mid
-    arrayL = array[left: mid + 1]
-    arrayR = array[mid + 1: right + 1]
+    arrayL = array[left: mid + 1]           # Create temporary left sub-array
+    arrayR = array[mid + 1: right + 1]         # Create temporary right sub-array
 
     while i < sizeL and j < sizeR:
         if arrayL[i] <= arrayR[j]:

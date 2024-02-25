@@ -4,7 +4,11 @@ from time import perf_counter
 import numpy as np
 import pandas as pd
 
+
+# iteration refers to number of times this test was done
+# Repeating test improves result consistency and reduces outlier
 def mergeSortTimer(array, iteration):
+
     timeSum = 0
 
     for _ in range(iteration):
@@ -42,5 +46,4 @@ def runTest(iteration, S):
     df.to_csv('Result_d.csv', header = ['Key Comparison', 'Time'])
 
 
-# Do not run unless you are sure you want to overwrite the file
 # runTest(15, 10)

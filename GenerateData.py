@@ -2,20 +2,22 @@ from random import sample
 from json import dump
 
 
-def generateRange(N, name):     # generate data
+# Generate a .txt file that contains an arrays of 5 randomly sorted list in increasing size.
+# If N is 1000, this will generate 5 arrays of 1000, 3000, 5000, 7000, 9000.
+def generateRange(N, name):
     data = []
-    for i in range(1, 10, 2):
-        # If N is 1000, this will generate 5 arrays of 1000, 3000, 5000, 7000, 9000
-        maxNum = N * i * 10 - 1
 
+    for i in range(1, 10, 2):
+        maxNum = N * i * 10 - 1
         data.append(sample(range(1, maxNum), N * i))
-        # sample(list L, size N) returns a randomly sorted sub-list
+        # random.sample(list L, size N) returns a randomly sorted sub-list
         # of size N from input list L
 
     with open(name, 'w') as file:
         dump(data, file)
 
 
+# Generate a .txt file that contains 1 randomly sorted list of N size
 def generateNData(N, name):
     maxNum = N * 10 - 1
     data = sample(range(1, maxNum), N)

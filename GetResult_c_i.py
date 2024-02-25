@@ -5,7 +5,7 @@ import pandas as pd
 
 
 def generateIndex():
-    # Generate list of index for file name [1000, 3000, 5000..., 10,000,000]
+    # Generate list of index for inputting file name [1000, 3000, 5000..., 10,000,000]
     array = []
     N = 1000
     for _ in range(4):
@@ -23,6 +23,7 @@ def runTest():
     for i in range(4):
         with open(f'datarange{1000 * (10 ** i)}.txt', 'r') as file:
             dataset = load(file)
+            # Read
 
         for array in dataset:
             result.append(mergeInsertionSort(10, array, 0, len(array) - 1))
