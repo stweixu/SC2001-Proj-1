@@ -46,4 +46,4 @@ def runTest(iteration, S):
     df.to_csv('Result_d.csv', header = ['Key Comparison', 'Time'])
 
 
-# runTest(15, 10)
+runTest(5 , 10)
