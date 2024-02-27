@@ -19,10 +19,16 @@ def generateRange(N, name):
 
 # Generate a .txt file that contains 1 randomly sorted list of N size
 def generateNData(N, name):
+    data = []
     maxNum = N * 10 - 1
-    data = sample(range(1, maxNum), N)
+    for i in range(10):
+        data.append(sample(range(1, maxNum), N))
     with open(name, 'w') as file:
         dump(data, file)
+
+
+for i in range (1,101):
+    generateNData(i, f'data{i}.txt')
 
 # generateRange(1000, 'datarange1000.txt')
 # generateRange(10000, 'datarange10000.txt')

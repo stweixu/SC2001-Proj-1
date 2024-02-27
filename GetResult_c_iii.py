@@ -1,5 +1,5 @@
 from json import load
-from MergeInsertionSort import mergeInsertionSort
+from MergeInsertionSort import *
 from time import perf_counter
 import numpy as np
 import pandas as pd
@@ -15,35 +15,78 @@ def mergeInsertionSortTimer(S, array):
     mergeInsertionSort(S, array, 0, len(array) - 1)
     return perf_counter() - start
 
+def mergeSortTimer(array):
+    start = perf_counter()
+    mergeSort(array, 0, len(array) - 1)
+    return (perf_counter() - start) * 10**6
+
+def insertionSortTimer(array):
+    start = perf_counter()
+    insertionSort(array, 0, len(array) - 1)
+    return (perf_counter() - start) * 10**6
+
 
 def getResult(iteration):
     # iteration refers to number of times test was done. Higher iteration reduces outliers
-    collated_result = []
 
-    for i in range(5):
-        result = []
-        data_size = 1000 * 10 ** i
-        array = extractData(data_size)
-        for S in range(41):
-            timeSum = 0
+    insertionSortResult =  []
+    mergeSortResult = []
+
+    for dataSize in range (1,101):
+        array = extractData(dataSize)
+        mergeSortTimeSum = 0
+        insertionSortTimeSum = 0
+
+        for index in range(len(array)):
             for _ in range(iteration):
-                arrayCopy = array.copy()
-                timeSum += mergeInsertionSortTimer(S, arrayCopy)
+                arrayCopyForMerge = array[index].copy()
+                mergeSortTimeSum += mergeSortTimer(arrayCopyForMerge)
 
-            result.append(timeSum / iteration)
-            print(f'Data = {data_size}, S: {S}, Time: {result[-1]}')
+                arrayCopyForInsertion = array[index].copy()
+                insertionSortTimeSum += insertionSortTimer(arrayCopyForInsertion)
 
-        collated_result.append(result)
-    print(collated_result)
-    return collated_result
+        mergeSortResult.append(mergeSortTimeSum / len(array) * iteration)
+        insertionSortResult.append(insertionSortTimeSum / len(array) * iteration)
+
+    collatedResult = [insertionSortResult, mergeSortResult]
+
+    return collatedResult
+
+
+    # collated_result = []
+    # for i in range(5):
+    #     result = []
+    #     data_size = 1000 * 10 ** i
+    #     array = extractData(data_size)
+    #     for S in range(41):
+    #         timeSum = 0
+    #         for _ in range(iteration):
+    #             arrayCopy = array.copy()
+    #             timeSum += mergeInsertionSortTimer(S, arrayCopy)
+    #
+    #         result.append(timeSum / iteration)
+    #         print(f'Data = {data_size}, S: {S}, Time: {result[-1]}')
+    #
+    #     collated_result.append(result)
+    # print(collated_result)
+    # return collated_result
 
 
 def runTest(iteration):
-    header = ['N = 1,000', 'N = 10,000', 'N = 100,000', 'N = 1,000,000', 'N = 10,000,000']
+    header = ['Insertion Sort', 'MergeSort']
     result = (getResult(iteration))
 
     result = pd.DataFrame(result)
-    pd.DataFrame.transpose(result).to_csv("Result_c_iii.csv", index_label='S', header=header)
+    pd.DataFrame.transpose(result).to_csv("Result_c_iii_updated.csv", index_label='S', header=header)
 
 
+#     header = ['N = 1,000', 'N = 10,000', 'N = 100,000', 'N = 1,000,000', 'N = 10,000,000']
+#     result = (getResult(iteration))
+#
+#     result = pd.DataFrame(result)
+#     pd.DataFrame.transpose(result).to_csv("Result_c_iii.csv", index_label='S', header=header)
+#
+#
 runTest(5)  # 5 iterations on the same list
+
+
